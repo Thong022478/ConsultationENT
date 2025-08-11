@@ -130,18 +130,18 @@
                     <select id="ward" name="ward" required
                             class="w-full px-4 py-3 border-2 border-purple-200 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-purple-400 transition duration-200 bg-purple-50/30">
                         <option value="">เลือกหอผู้ป่วย</option>
-                        <option value="Ward ICU 4C">Ward ICU 4C</option>
-                        <option value="Ward CCU 4D2">Ward CCU 4D2</option>
-                        <option value="Ward CCU 4D3">Ward SICU 4D2</option>
-                        <option value="Ward 5C">Ward 5C</option>
-                        <option value="Ward 5D">Ward 5D</option>
-                        <option value="Ward 5E">Ward 5E</option>
-                        <option value="Ward 6B1">Ward 6B1</option>
-                        <option value="Ward 6B2">Ward 6B2</option>
-                        <option value="Ward 6C">Ward 6C</option>
-                        <option value="Ward 6E">Ward 6E</option>
-                        <option value="Ward 6F">Ward 6F</option>
-                        <option value="Ward 7F">Ward 7F</option>
+                        <option value="ICU 4C">Ward ICU 4C</option>
+                        <option value="CCU 4D2">Ward CCU 4D2</option>
+                        <option value="CCU 4D3">Ward SICU 4D2</option>
+                        <option value="5C">Ward 5C</option>
+                        <option value="5D">Ward 5D</option>
+                        <option value="5E">Ward 5E</option>
+                        <option value="6B1">Ward 6B1</option>
+                        <option value="6B2">Ward 6B2</option>
+                        <option value="6C">Ward 6C</option>
+                        <option value="6E">Ward 6E</option>
+                        <option value="6F">Ward 6F</option>
+                        <option value="7F">Ward 7F</option>
                     </select>
                 </div>
 
@@ -188,16 +188,22 @@
             try {
                 // Prepare form data
                 const formData = new URLSearchParams();
-                  formData.append('hn', document.getElementById('hn').value);
-                  formData.append('fullname', document.getElementById('fullname').value);
+                      formData.append('hn', document.getElementById('hn').value);
+                      formData.append('fullname', document.getElementById('fullname').value);
 
-                const day = document.getElementById('birthDay').value;
-                const month = document.getElementById('birthMonth').value;
-                const buddhistYear = document.getElementById('birthYear').value;
-                const birthdate = `${day}/${month}/${buddhistYear}`;
+                      const day = document.getElementById('birthDay').value;
+                      const month = document.getElementById('birthMonth').value;
+                      const buddhistYear = document.getElementById('birthYear').value;
+                      const birthdate = `${day}/${month}/${buddhistYear}`;
                       formData.append('birthdate', birthdate);
 
-                      formData.append('timestamp', new Date().toLocaleString('th-TH'));
+                      const thaiDate = new Date().toLocaleDateString('th-TH', {
+                        day: 'numeric',
+                        month: 'long',
+                        year: 'numeric',
+                      });
+                      formData.append('timestamp', thaiDate);
+
                       formData.append('age', document.getElementById('age').value);
                       formData.append('doctor', document.getElementById('doctor').value);
                       formData.append('diagnosis', document.getElementById('diagnosis').value);
@@ -349,4 +355,5 @@ const response = await fetch('https://script.google.com/macros/s/AKfycbwidOJeqWD
         });
     </script>
 <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'968ca235820e50cb',t:'MTc1NDEyNzgzNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+
 </html>
